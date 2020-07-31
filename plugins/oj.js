@@ -25,7 +25,9 @@ async function _pioj({ meta }, id) {
     id = id.trim();
     if (!id) return meta.$send('请输入要查询的题号！');
     const res = await axios.get(`https://oj.piterator.com/problem/${id}/json/`);
-    return await meta.$send(`${res.data.title}\nDescription:\n${res.data.description}\nInput:\n${res.data.input}\nOutput:\n${res.data.output}`);
+    return await meta.$send(
+        `${res.data.title}\nDescription:\n${res.data.description}\nInput:\n${res.data.input}\nOutput:\n${res.data.output}\nInputFile: {res.data.input_file}\nOutputFile: {res.data.output_file}\nDifficulty: {res.data.difficulty}`
+    );
 }
 
 exports.apply = (app) => {
